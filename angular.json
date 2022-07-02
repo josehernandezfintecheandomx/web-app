@@ -33,32 +33,32 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "src/main.scss",
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/theme/deeppurple-amber.scss",
                 "bundleName": "deeppurple-amber"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/theme/indigo-pink.scss",
                 "bundleName": "indigo-pink"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/theme/pink-bluegrey.scss",
                 "bundleName": "pink-bluegrey"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/theme/purple-green.scss",
                 "bundleName": "purple-green"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/theme/custom/denim-yellowgreen.scss",
                 "bundleName": "denim-yellowgreen"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/theme/custom/pictonblue-yellowgreen.scss",
                 "bundleName": "pictonblue-yellowgreen"
               }
@@ -121,6 +121,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
+              "node_modules/font-awesome/css/font-awesome.css",
               "src/main.scss",
               {
                 "inject": false,
@@ -160,18 +161,6 @@
               "src/assets"
             ]
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -189,17 +178,6 @@
             "production": {
               "devServerTarget": "mifosx-web-app:serve:production"
             }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
