@@ -55,7 +55,7 @@ export class AddClientChargeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.maxDate = this.settingsService.businessDate;
+    this.maxDate = this.settingsService.maxFutureDate;
     this.createClientsChargeForm();
     this.buildDependencies();
   }
@@ -75,7 +75,7 @@ export class AddClientChargeComponent implements OnInit {
           this.chargeDetails.chargeTimeTypeAnnualOrMonth = true;
         }
         if (!this.chargeDetails.dueDateNotRequired && !this.chargeDetails.chargeTimeTypeAnnualOrMonth) {
-          this.clientChargeForm.addControl('dueDate', new FormControl('', Validators.required));
+          this.clientChargeForm.addControl('dueDate', new FormControl(this.settingsService.currentDate, Validators.required));
         } else {
           this.clientChargeForm.removeControl('dueDate');
         }
@@ -136,7 +136,7 @@ export class AddClientChargeComponent implements OnInit {
         }
       }
     }
-    this.clientsService.createClientCharge(this.clientId, clientCharge).subscribe( () => {
+    this.clientsService.createClientCharge(this.clientId, clientCharge).subscribe(() => {
       this.router.navigate(['../../'], { relativeTo: this.route });
     });
   }

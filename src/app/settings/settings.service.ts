@@ -134,6 +134,13 @@ export class SettingsService {
   }
 
   /**
+   * Returns current Business date server
+   */
+  get currentDate(): Date {
+    return new Date();
+  }
+
+  /**
    * Returns max Future date
    */
   get maxFutureDate(): Date {

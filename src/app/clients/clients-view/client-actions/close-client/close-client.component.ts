@@ -38,11 +38,11 @@ export class CloseClientComponent implements OnInit {
    * @param {SettingsService} settingsService Setting service
    */
   constructor(private formBuilder: FormBuilder,
-              private clientsService: ClientsService,
-              private dateUtils: Dates,
-              private route: ActivatedRoute,
-              private router: Router,
-              private settingsService: SettingsService) {
+    private clientsService: ClientsService,
+    private dateUtils: Dates,
+    private route: ActivatedRoute,
+    private router: Router,
+    private settingsService: SettingsService) {
     this.route.data.subscribe((data: { clientActionData: any }) => {
       this.closureData = data.clientActionData.narrations;
     });
@@ -59,7 +59,7 @@ export class CloseClientComponent implements OnInit {
    */
   createCloseClientForm() {
     this.closeClientForm = this.formBuilder.group({
-      'closureDate': ['', Validators.required],
+      'closureDate': [this.settingsService.currentDate, Validators.required],
       'closureReasonId': ['', Validators.required]
     });
   }

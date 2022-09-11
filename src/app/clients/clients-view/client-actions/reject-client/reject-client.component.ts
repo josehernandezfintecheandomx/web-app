@@ -38,11 +38,11 @@ export class RejectClientComponent implements OnInit {
    * @param {SettingsService} settingsService Setting service
    */
   constructor(private formBuilder: FormBuilder,
-              private clientsService: ClientsService,
-              private dateUtils: Dates,
-              private route: ActivatedRoute,
-              private router: Router,
-              private settingsService: SettingsService) {
+    private clientsService: ClientsService,
+    private dateUtils: Dates,
+    private route: ActivatedRoute,
+    private router: Router,
+    private settingsService: SettingsService) {
     this.route.data.subscribe((data: { clientActionData: any }) => {
       this.rejectionData = data.clientActionData.narrations;
     });
@@ -59,7 +59,7 @@ export class RejectClientComponent implements OnInit {
    */
   createRejectClientForm() {
     this.rejectClientForm = this.formBuilder.group({
-      'rejectionDate': ['', Validators.required],
+      'rejectionDate': [this.settingsService.currentDate, Validators.required],
       'rejectionReasonId': ['', Validators.required]
     });
   }

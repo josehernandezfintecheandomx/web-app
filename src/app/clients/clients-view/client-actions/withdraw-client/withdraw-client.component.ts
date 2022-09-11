@@ -38,11 +38,11 @@ export class WithdrawClientComponent implements OnInit {
    * @param {SettingsService} settingsService Setting service
    */
   constructor(private formBuilder: FormBuilder,
-              private clientsService: ClientsService,
-              private dateUtils: Dates,
-              private route: ActivatedRoute,
-              private router: Router,
-              private settingsService: SettingsService) {
+    private clientsService: ClientsService,
+    private dateUtils: Dates,
+    private route: ActivatedRoute,
+    private router: Router,
+    private settingsService: SettingsService) {
     this.route.data.subscribe((data: { clientActionData: any }) => {
       this.withdrawalData = data.clientActionData.narrations;
     });
@@ -59,7 +59,7 @@ export class WithdrawClientComponent implements OnInit {
    */
   createWithdrawClientForm() {
     this.withdrawClientForm = this.formBuilder.group({
-      'withdrawalDate': ['', Validators.required],
+      'withdrawalDate': [this.settingsService.currentDate, Validators.required],
       'withdrawalReasonId': ['', Validators.required]
     });
   }

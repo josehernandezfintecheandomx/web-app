@@ -38,11 +38,11 @@ export class TransferClientComponent implements OnInit {
    * @param {SettingsService} settingsService Setting service
    */
   constructor(private formBuilder: FormBuilder,
-              private clientsService: ClientsService,
-              private dateUtils: Dates,
-              private route: ActivatedRoute,
-              private router: Router,
-              private settingsService: SettingsService) {
+    private clientsService: ClientsService,
+    private dateUtils: Dates,
+    private route: ActivatedRoute,
+    private router: Router,
+    private settingsService: SettingsService) {
     this.route.data.subscribe((data: { clientActionData: any }) => {
       this.officeData = data.clientActionData;
     });
@@ -60,7 +60,7 @@ export class TransferClientComponent implements OnInit {
   createTransferClientForm() {
     this.transferClientForm = this.formBuilder.group({
       'destinationOfficeId': ['', Validators.required],
-      'transferDate': ['', Validators.required],
+      'transferDate': [this.settingsService.currentDate, Validators.required],
       'note': ['']
     });
   }

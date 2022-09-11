@@ -36,11 +36,11 @@ export class ReactivateClientComponent implements OnInit {
    * @param {SettingsService} settingsService Setting service
    */
   constructor(private formBuilder: FormBuilder,
-              private clientsService: ClientsService,
-              private dateUtils: Dates,
-              private route: ActivatedRoute,
-              private router: Router,
-              private settingsService: SettingsService) {
+    private clientsService: ClientsService,
+    private dateUtils: Dates,
+    private route: ActivatedRoute,
+    private router: Router,
+    private settingsService: SettingsService) {
     this.clientId = this.route.parent.snapshot.params['clientId'];
   }
 
@@ -57,7 +57,7 @@ export class ReactivateClientComponent implements OnInit {
    */
   createReactivateClientForm() {
     this.reactivateClientForm = this.formBuilder.group({
-      'reactivationDate': ['', Validators.required]
+      'reactivationDate': [this.settingsService.currentDate, Validators.required]
     });
   }
 

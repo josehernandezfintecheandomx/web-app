@@ -35,11 +35,11 @@ export class UndoClientRejectionComponent implements OnInit {
    * @param {Router} router Router
    */
   constructor(private formBuilder: FormBuilder,
-              private clientsService: ClientsService,
-              private dateUtils: Dates,
-              private route: ActivatedRoute,
-              private router: Router,
-              private settingsService: SettingsService) {
+    private clientsService: ClientsService,
+    private dateUtils: Dates,
+    private route: ActivatedRoute,
+    private router: Router,
+    private settingsService: SettingsService) {
     this.clientId = this.route.parent.snapshot.params['clientId'];
   }
 
@@ -56,7 +56,7 @@ export class UndoClientRejectionComponent implements OnInit {
    */
   createUndoClientRejectionForm() {
     this.undoClientRejectionForm = this.formBuilder.group({
-      'reopenedDate': ['', Validators.required]
+      'reopenedDate': [this.settingsService.currentDate, Validators.required]
     });
   }
 

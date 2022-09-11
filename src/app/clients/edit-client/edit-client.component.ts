@@ -55,11 +55,11 @@ export class EditClientComponent implements OnInit {
    * @param {SettingsService} settingsService Settings Service
    */
   constructor(private formBuilder: FormBuilder,
-              private route: ActivatedRoute,
-              private router: Router,
-              private clientsService: ClientsService,
-              private dateUtils: Dates,
-              private settingsService: SettingsService) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private clientsService: ClientsService,
+    private dateUtils: Dates,
+    private settingsService: SettingsService) {
     this.route.data.subscribe((data: { clientDataAndTemplate: any }) => {
       this.clientDataAndTemplate = data.clientDataAndTemplate;
     });
@@ -84,9 +84,14 @@ export class EditClientComponent implements OnInit {
       'dateOfBirth': this.clientDataAndTemplate.dateOfBirth && new Date(this.clientDataAndTemplate.dateOfBirth),
       'clientTypeId': this.clientDataAndTemplate.clientType && this.clientDataAndTemplate.clientType.id,
       'clientClassificationId': this.clientDataAndTemplate.clientClassification && this.clientDataAndTemplate.clientClassification.id,
-      'submittedOnDate': this.clientDataAndTemplate.timeline.submittedOnDate && new Date(this.clientDataAndTemplate.timeline.submittedOnDate),
-      'activationDate': this.clientDataAndTemplate.timeline.activatedOnDate && new Date(this.clientDataAndTemplate.timeline.activatedOnDate)
+      'submittedOnDate': this.clientDataAndTemplate.timeline.submittedOnDate && new Date(this.clientDataAndTemplate.timeline.submittedOnDate)
     });
+
+    if (this.clientDataAndTemplate.active) {
+      this.editClientForm.addControl('activationDate', new FormControl((this.clientDataAndTemplate.timeline.activatedOnDate && new Date(this.clientDataAndTemplate.timeline.activatedOnDate)), Validators.required));
+    } else {
+      this.editClientForm.addControl('activationDate', new FormControl(''));
+    }
   }
 
   /**
