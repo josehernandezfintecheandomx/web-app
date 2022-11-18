@@ -7,9 +7,9 @@ frontend:
     build:
       commands:
         - NODE_OPTIONS=--openssl-legacy-provider
-        - npm run ng build --output-path=/dist "--configuration production"
+        - npm run ng build --output-path=./dist "--configuration production"
   artifacts:
-    baseDirectory: dist
+    baseDirectory: dist/web-app
     files:
       - '**/*'
   cache:
