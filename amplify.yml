@@ -9,7 +9,7 @@ frontend:
         - NODE_OPTIONS=--openssl-legacy-provider
         - npm run build:prod
   artifacts:
-    baseDirectory: dist/web-app
+    baseDirectory: dist
     files:
       - '**/*'
   cache:
