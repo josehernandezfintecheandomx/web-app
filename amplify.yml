@@ -18,7 +18,7 @@ frontend:
       commands:
         - ng build --output-path=/dist $BUILD_ENVIRONMENT_OPTIONS
   artifacts:
-    baseDirectory: dist
+    baseDirectory: dist/web-app
     files:
       - '**/*'
   cache:
