@@ -120,6 +120,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               if (routeData.breadcrumb === 'Clients') {
                 breadcrumbLabel = routeData.clientViewData.displayName;
                 currentUrl += `/general`;
+
               } else if (routeData.breadcrumb === 'Groups') {
                 breadcrumbLabel = routeData.groupViewData.name;
               } else if (routeData.breadcrumb === 'Centers') {
@@ -157,6 +158,18 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               url = route.snapshot.data[routeAddBreadcrumbLink];
             } else {
               url = currentUrl;
+            }
+          }
+
+          if (url !== undefined) {
+            if (url.length > 8 && url.search(`/clients/`) > 0 ) {
+              const replaceGeneral = `/general/`;
+              let currentUrlTemp = url.replace(replaceGeneral, `/`);
+              currentUrlTemp = currentUrlTemp.replace(`//`, `/`);
+              currentUrlTemp += `/general`;
+              const replaceDoubleSlash = `/general/general`;
+              currentUrlTemp = currentUrlTemp.replace(replaceDoubleSlash, `/general`);
+              url = currentUrlTemp;
             }
           }
 
