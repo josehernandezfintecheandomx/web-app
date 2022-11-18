@@ -3,13 +3,22 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install
+        - NPM_REGISTRY_URL=https://registry.npmjs.org/
+        - BUILD_ENVIRONMENT_OPTIONS="--configuration production"
+        - PUPPETEER_DOWNLOAD_HOST_ARG=https://storage.googleapis.com
+        - PUPPETEER_CHROMIUM_REVISION_ARG=1011831
+        - PUPPETEER_DOWNLOAD_HOST $PUPPETEER_DOWNLOAD_HOST_ARG
+        - PUPPETEER_CHROMIUM_REVISION $PUPPETEER_CHROMIUM_REVISION_ARG
+        - npm cache clear --force
+        - npm config set fetch-retry-maxtimeout 120000
+        - npm config set registry $NPM_REGISTRY_URL --location=global
+        - npm install --location=global @angular/cli@12.2.17
+        - npm ci
     build:
       commands:
-        - NODE_OPTIONS=--openssl-legacy-provider
-        - npm run ng build --output-path=./dist "--configuration production"
+        - ng build --output-path=/dist $BUILD_ENVIRONMENT_OPTIONS
   artifacts:
-    baseDirectory: dist/web-app
+    baseDirectory: dist
     files:
       - '**/*'
   cache:
