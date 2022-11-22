@@ -8,7 +8,6 @@ It is a Single-Page App (SPA) written in standard web technologies [HTML5](http:
 
 The latest code is continuously deployed at https://openmf.github.io/web-app/ whenever a PR is merged into the master branch.
 
-
 ## Getting started developing
 
 1. Ensure you have the following installed in your system:
