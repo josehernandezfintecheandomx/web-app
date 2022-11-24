@@ -12,5 +12,5 @@
 
   // Language Environment variables
   window["env"]["defaultLanguage"] = 'en-US';
-  window["env"]["supportedLanguages"] = 'en-US,es-MX,fr-FR';
+  window["env"]["supportedLanguages"] = 'en-US';
 })(this);
