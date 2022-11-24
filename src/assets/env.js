@@ -11,6 +11,6 @@
   window["env"]["fineractPlatformTenantId"]  = 'default';
 
   // Language Environment variables
-  window["env"]["defaultLanguage"] = 'es-MX';
-  window["env"]["supportedLanguages"] = 'es-MX,en-US,fr-FR';
+  window["env"]["defaultLanguage"] = 'en-US';
+  window["env"]["supportedLanguages"] = 'en-US,es-MX,fr-FR';
 })(this);
