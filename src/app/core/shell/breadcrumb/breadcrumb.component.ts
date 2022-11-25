@@ -90,7 +90,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
         const childrenRoutes = currentRoute.children;
         let breadcrumbLabel: any;
         let url: any;
-        let urlFIXED: any;
 
         childrenRoutes.forEach(route => {
           currentRoute = route;
@@ -102,7 +101,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
 
           const routeURL = route.snapshot.url.map(segment => segment.path).join('/');
           currentUrl += `/${routeURL}`;
-          //console.log("EL MENU currentUrl "+currentUrl);
+
           if (currentUrl === '/') {
             breadcrumbLabel = 'Home';
           }
@@ -121,7 +120,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               if (routeData.breadcrumb === 'Clients') {
                 breadcrumbLabel = routeData.clientViewData.displayName;
                 currentUrl += `/general`;
-                //console.log("EL MENU DE CLIENTES "+currentUrl);
 
               } else if (routeData.breadcrumb === 'Groups') {
                 breadcrumbLabel = routeData.groupViewData.name;
@@ -166,7 +164,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
           }
           
           console.log("LA URL FINAL ES "+url);
-          console.log("LA URL FINAL FIXED ES "+urlFIXED);
 
           if(url !== undefined){
             if (url.length>8 && url.search("/clients/")>0 ){
@@ -178,10 +175,11 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
               currentUrlTemp2 += `/general`;
               console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);
-              var replaceDoubleSlash2 = "//general/general";
-              var currentUrlTemp3 = currentUrlTemp2.replace(replaceDoubleSlash2, "/"); 
+              var replaceDoubleSlash2 = "/general/general";
+              var currentUrlTemp3 = currentUrlTemp2.replace(replaceDoubleSlash2, "/general"); 
               console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp3);
               url = currentUrlTemp3; 
+              console.log("LA URL FINAL FIXED ES "+url);
             }
             
           }
