@@ -118,9 +118,16 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               breadcrumbLabel = route.snapshot.paramMap.get(route.snapshot.data[routeParamBreadcrumb]);
               const routeData: Data = route.snapshot.data;
               if (routeData.breadcrumb === 'Clients') {
-                breadcrumbLabel = routeData.clientViewData.displayName;                
+                breadcrumbLabel = routeData.clientViewData.displayName;
                 currentUrl += `/general`;
                 console.log("EL MENU DE CLIENTES "+currentUrl);
+
+                var replaceGeneral = "/general/";
+                var currentUrlTemp = currentUrl.replace(replaceGeneral, "/"); 
+                console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
+                var replaceDoubleSlash = "//";
+                var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
+                console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
               } else if (routeData.breadcrumb === 'Groups') {
                 breadcrumbLabel = routeData.groupViewData.name;
               } else if (routeData.breadcrumb === 'Centers') {
@@ -162,13 +169,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               console.log("LA URL SIN hasOwnProperty "+url);
             }
           }
-
-          var replaceGeneral = "/general/";
-          var currentUrlTemp = url.replace(replaceGeneral, "/"); 
-          console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
-          var replaceDoubleSlash = "//";
-          var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
-          console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
 
           console.log("LA URL FINAL ES "+url);
           const breadcrumb: Breadcrumb = {
