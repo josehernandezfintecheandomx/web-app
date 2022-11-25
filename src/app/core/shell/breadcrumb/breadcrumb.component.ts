@@ -101,7 +101,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
 
           const routeURL = route.snapshot.url.map(segment => segment.path).join('/');
           currentUrl += `/${routeURL}`;
-          console.log("EL MENU currentUrl "+currentUrl);
+
           if (currentUrl === '/') {
             breadcrumbLabel = 'Home';
           }
@@ -118,39 +118,8 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               breadcrumbLabel = route.snapshot.paramMap.get(route.snapshot.data[routeParamBreadcrumb]);
               const routeData: Data = route.snapshot.data;
               if (routeData.breadcrumb === 'Clients') {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                breadcrumbLabel = routeData.clientViewData.displayName;
-<<<<<<< HEAD
-                var replaceGeneral = /\/general/gi;
-                currentUrl = url.replace(replaceGeneral, "");
-                currentUrl += `/general`;
-
-=======
-                //var replaceGeneral = /\/general/gi;
-                //var currentUrl = url.replace(replaceGeneral, "");
-=======
-                breadcrumbLabel = routeData.clientViewData.displayName;
->>>>>>> 8c7e1e71 (Fix the breadcrumb url generation)
-                currentUrl += `/general`;
-                console.log("EL MENU DE CLIENTES "+currentUrl);
->>>>>>> 3491d069 (Fix the breadcrumb url generation)
-=======
                 breadcrumbLabel = routeData.clientViewData.displayName;
                 currentUrl += `/general`;
-<<<<<<< HEAD
-                console.log("EL MENU DE CLIENTES "+currentUrl);
-
-                var replaceGeneral = "/general/";
-                var currentUrlTemp = currentUrl.replace(replaceGeneral, "/");
-                console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
-                var replaceDoubleSlash = "//";
-                var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/");
-                console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
->>>>>>> 16da3123 (Fix the breadcrumb url generation)
-=======
-                console.log("EL MENU DE CLIENTES "+currentUrl);
->>>>>>> 8632dfdd (Fix the breadcrumb url generation)
               } else if (routeData.breadcrumb === 'Groups') {
                 breadcrumbLabel = routeData.groupViewData.name;
               } else if (routeData.breadcrumb === 'Centers') {
@@ -186,13 +155,10 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
 
             if (route.snapshot.data.hasOwnProperty(routeAddBreadcrumbLink)) {
               url = route.snapshot.data[routeAddBreadcrumbLink];
-              console.log("LA URL CON hasOwnProperty "+url);
             } else {
               url = currentUrl;
-              console.log("LA URL SIN hasOwnProperty "+url);
             }
           }
-
           if (url !== undefined) {
             if (url.length > 8 && url.search(`/clients/`) > 0 ) {
               const replaceGeneral = `/general/`;
