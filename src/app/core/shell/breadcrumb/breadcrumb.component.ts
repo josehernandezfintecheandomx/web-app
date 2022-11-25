@@ -163,11 +163,11 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
             }
           }
 
-          var replaceGeneral = /\/general\//gi;
-          var currentUrlTemp = url.replace(replaceGeneral, ""); 
+          var replaceGeneral = "/general/";
+          var currentUrlTemp = url.replace(replaceGeneral, "/"); 
           console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
-          var replaceDoubleSlash = /\/\//gi;
-          var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, ""); 
+          var replaceDoubleSlash = "//";
+          var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
           console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
 
           console.log("LA URL FINAL ES "+url);
