@@ -119,6 +119,8 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               const routeData: Data = route.snapshot.data;
               if (routeData.breadcrumb === 'Clients') {
                 breadcrumbLabel = routeData.clientViewData.displayName;
+                var replaceGeneral = /\/general/gi;
+                currentUrl = url.replace(replaceGeneral, ""); 
                 currentUrl += `/general`;
               } else if (routeData.breadcrumb === 'Groups') {
                 breadcrumbLabel = routeData.groupViewData.name;
@@ -160,9 +162,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
             }
           }
 
-          var replaceGeneral = /\/general/gi;
-          url = url.replace(replaceGeneral, "")+`/general`; 
-          
           const breadcrumb: Breadcrumb = {
             label: breadcrumbLabel,
             url: url
