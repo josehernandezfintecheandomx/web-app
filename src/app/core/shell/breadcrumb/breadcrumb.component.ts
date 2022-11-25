@@ -118,9 +118,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               breadcrumbLabel = route.snapshot.paramMap.get(route.snapshot.data[routeParamBreadcrumb]);
               const routeData: Data = route.snapshot.data;
               if (routeData.breadcrumb === 'Clients') {
-                breadcrumbLabel = routeData.clientViewData.displayName;
-                //var replaceGeneral = /\/general/gi;
-                //var currentUrl = url.replace(replaceGeneral, ""); 
+                breadcrumbLabel = routeData.clientViewData.displayName;                
                 currentUrl += `/general`;
                 console.log("EL MENU DE CLIENTES "+currentUrl);
               } else if (routeData.breadcrumb === 'Groups') {
@@ -164,6 +162,14 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               console.log("LA URL SIN hasOwnProperty "+url);
             }
           }
+
+          var replaceGeneral = /\/general\//gi;
+          var currentUrlTemp = url.replace(replaceGeneral, ""); 
+          console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
+          var replaceDoubleSlash = /\/\//gi;
+          var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, ""); 
+          console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
+
           console.log("LA URL FINAL ES "+url);
           const breadcrumb: Breadcrumb = {
             label: breadcrumbLabel,
