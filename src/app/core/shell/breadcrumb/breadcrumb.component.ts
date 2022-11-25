@@ -90,7 +90,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
         const childrenRoutes = currentRoute.children;
         let breadcrumbLabel: any;
         let url: any;
-        let urlFIXED: any;
 
         childrenRoutes.forEach(route => {
           currentRoute = route;
@@ -171,6 +170,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               url = currentUrlTemp;
             }
           }
+
           const breadcrumb: Breadcrumb = {
             label: breadcrumbLabel,
             url: url
