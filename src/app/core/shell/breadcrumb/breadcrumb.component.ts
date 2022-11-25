@@ -160,6 +160,9 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
             }
           }
 
+          var replaceGeneral = /\/general/gi;
+          url = url.replace(replaceGeneral, "")+`/general`; 
+          
           const breadcrumb: Breadcrumb = {
             label: breadcrumbLabel,
             url: url
