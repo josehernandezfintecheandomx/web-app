@@ -118,6 +118,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               breadcrumbLabel = route.snapshot.paramMap.get(route.snapshot.data[routeParamBreadcrumb]);
               const routeData: Data = route.snapshot.data;
               if (routeData.breadcrumb === 'Clients') {
+<<<<<<< HEAD
                 breadcrumbLabel = routeData.clientViewData.displayName;
 <<<<<<< HEAD
                 var replaceGeneral = /\/general/gi;
@@ -127,6 +128,9 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
 =======
                 //var replaceGeneral = /\/general/gi;
                 //var currentUrl = url.replace(replaceGeneral, "");
+=======
+                breadcrumbLabel = routeData.clientViewData.displayName;
+>>>>>>> 8c7e1e71 (Fix the breadcrumb url generation)
                 currentUrl += `/general`;
                 console.log("EL MENU DE CLIENTES "+currentUrl);
 >>>>>>> 3491d069 (Fix the breadcrumb url generation)
