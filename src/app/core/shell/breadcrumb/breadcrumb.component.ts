@@ -90,6 +90,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
         const childrenRoutes = currentRoute.children;
         let breadcrumbLabel: any;
         let url: any;
+        let urlFIXED: any;
 
         childrenRoutes.forEach(route => {
           currentRoute = route;
@@ -120,7 +121,22 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               if (routeData.breadcrumb === 'Clients') {
                 breadcrumbLabel = routeData.clientViewData.displayName;
                 currentUrl += `/general`;
-                console.log("EL MENU DE CLIENTES "+currentUrl);                
+                console.log("EL MENU DE CLIENTES "+currentUrl);
+
+                if(url.length >10){
+                  if(url.search("/general/")>0){
+                      var replaceGeneral = "/general/";
+                      var currentUrlTemp = currentUrl.replace(replaceGeneral, "/"); 
+                      console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
+                      var replaceDoubleSlash = "//";
+                      var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
+                      console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
+                      currentUrlTemp2 += `/general`;
+                      console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);              
+                      urlFIXED = currentUrlTemp2;  
+                  }
+                }
+
               } else if (routeData.breadcrumb === 'Groups') {
                 breadcrumbLabel = routeData.groupViewData.name;
               } else if (routeData.breadcrumb === 'Centers') {
@@ -162,21 +178,10 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               console.log("LA URL SIN hasOwnProperty "+url);
             }
           }
-
-          if(url.length >10){
-            if(url.search("/general/")>0){
-                var replaceGeneral = "/general/";
-                var currentUrlTemp = currentUrl.replace(replaceGeneral, "/"); 
-                console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
-                var replaceDoubleSlash = "//";
-                var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
-                console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
-                currentUrlTemp2 += `/general`;
-                console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);                
-            }
-          }
-
+          
           console.log("LA URL FINAL ES "+url);
+          console.log("LA URL FINAL FIXED ES "+urlFIXED);
+          
           const breadcrumb: Breadcrumb = {
             label: breadcrumbLabel,
             url: url
