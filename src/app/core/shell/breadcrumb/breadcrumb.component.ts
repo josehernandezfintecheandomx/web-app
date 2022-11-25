@@ -156,30 +156,26 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
 
             if (route.snapshot.data.hasOwnProperty(routeAddBreadcrumbLink)) {
               url = route.snapshot.data[routeAddBreadcrumbLink];
-              console.log("LA URL CON hasOwnProperty "+url);
             } else {
               url = currentUrl;
-              console.log("LA URL SIN hasOwnProperty "+url);
             }
           }
-          
-          console.log("LA URL FINAL ES "+url);
 
           if(url !== undefined){
             if (url.length>8 && url.search("/clients/")>0 ){
               var replaceGeneral = "/general/";
               var currentUrlTemp = url.replace(replaceGeneral, "/"); 
-              console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
+              //console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
               var replaceDoubleSlash = "//";
               var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
-              console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
+              //console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
               currentUrlTemp2 += `/general`;
-              console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);
+              //console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);
               var replaceDoubleSlash2 = "/general/general";
               var currentUrlTemp3 = currentUrlTemp2.replace(replaceDoubleSlash2, "/general"); 
-              console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp3);
+              //console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp3);
               url = currentUrlTemp3; 
-              console.log("LA URL FINAL FIXED ES "+url);
+              //console.log("LA URL FINAL FIXED ES "+url);
             }
             
           }
