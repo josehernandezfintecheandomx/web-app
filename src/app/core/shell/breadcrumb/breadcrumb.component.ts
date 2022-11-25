@@ -119,6 +119,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
               const routeData: Data = route.snapshot.data;
               if (routeData.breadcrumb === 'Clients') {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 breadcrumbLabel = routeData.clientViewData.displayName;
 <<<<<<< HEAD
                 var replaceGeneral = /\/general/gi;
@@ -134,6 +135,18 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
                 currentUrl += `/general`;
                 console.log("EL MENU DE CLIENTES "+currentUrl);
 >>>>>>> 3491d069 (Fix the breadcrumb url generation)
+=======
+                breadcrumbLabel = routeData.clientViewData.displayName;
+                currentUrl += `/general`;
+                console.log("EL MENU DE CLIENTES "+currentUrl);
+
+                var replaceGeneral = "/general/";
+                var currentUrlTemp = currentUrl.replace(replaceGeneral, "/");
+                console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
+                var replaceDoubleSlash = "//";
+                var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/");
+                console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
+>>>>>>> 16da3123 (Fix the breadcrumb url generation)
               } else if (routeData.breadcrumb === 'Groups') {
                 breadcrumbLabel = routeData.groupViewData.name;
               } else if (routeData.breadcrumb === 'Centers') {
