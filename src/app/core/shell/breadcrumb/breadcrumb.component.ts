@@ -123,18 +123,16 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
                 currentUrl += `/general`;
                 console.log("EL MENU DE CLIENTES "+currentUrl);
 
-                if(currentUrl.length >10){
-                  if(currentUrl.search("/general/")>0){
-                      var replaceGeneral = "/general/";
-                      var currentUrlTemp = currentUrl.replace(replaceGeneral, "/"); 
-                      console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
-                      var replaceDoubleSlash = "//";
-                      var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
-                      console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
-                      currentUrlTemp2 += `/general`;
-                      console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);              
-                      urlFIXED = currentUrlTemp2;  
-                  }
+                var replaceGeneral = "/general/";
+                var currentUrlTemp = currentUrl.replace(replaceGeneral, "/"); 
+                console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
+                var replaceDoubleSlash = "//";
+                var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
+                console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
+                currentUrlTemp2 += `/general`;
+                console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);              
+                urlFIXED = currentUrlTemp2;  
+                
                 }
 
               } else if (routeData.breadcrumb === 'Groups') {
