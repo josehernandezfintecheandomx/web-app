@@ -123,16 +123,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
                 currentUrl += `/general`;
                 console.log("EL MENU DE CLIENTES "+currentUrl);
 
-                var replaceGeneral = "/general/";
-                var currentUrlTemp = currentUrl.replace(replaceGeneral, "/"); 
-                console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
-                var replaceDoubleSlash = "//";
-                var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
-                console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
-                currentUrlTemp2 += `/general`;
-                console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);              
-                urlFIXED = currentUrlTemp2;  
-
               } else if (routeData.breadcrumb === 'Groups') {
                 breadcrumbLabel = routeData.groupViewData.name;
               } else if (routeData.breadcrumb === 'Centers') {
@@ -177,6 +167,20 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
           
           console.log("LA URL FINAL ES "+url);
           console.log("LA URL FINAL FIXED ES "+urlFIXED);
+
+          if(url !== undefined){
+
+            var replaceGeneral = "/general/";
+            var currentUrlTemp = url.replace(replaceGeneral, "/"); 
+            console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
+            var replaceDoubleSlash = "//";
+            var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
+            console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
+            currentUrlTemp2 += `/general`;
+            console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);              
+            urlFIXED = currentUrlTemp2;  
+
+          }
 
           const breadcrumb: Breadcrumb = {
             label: breadcrumbLabel,
