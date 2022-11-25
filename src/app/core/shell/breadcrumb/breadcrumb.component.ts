@@ -123,8 +123,8 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
                 currentUrl += `/general`;
                 console.log("EL MENU DE CLIENTES "+currentUrl);
 
-                if(url.length >10){
-                  if(url.search("/general/")>0){
+                if(currentUrl.length >10){
+                  if(currentUrl.search("/general/")>0){
                       var replaceGeneral = "/general/";
                       var currentUrlTemp = currentUrl.replace(replaceGeneral, "/"); 
                       console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
@@ -181,7 +181,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
           
           console.log("LA URL FINAL ES "+url);
           console.log("LA URL FINAL FIXED ES "+urlFIXED);
-          
+
           const breadcrumb: Breadcrumb = {
             label: breadcrumbLabel,
             url: url
