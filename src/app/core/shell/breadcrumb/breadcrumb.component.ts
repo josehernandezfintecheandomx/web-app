@@ -132,8 +132,6 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
                 currentUrlTemp2 += `/general`;
                 console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);              
                 urlFIXED = currentUrlTemp2;  
-                
-                }
 
               } else if (routeData.breadcrumb === 'Groups') {
                 breadcrumbLabel = routeData.groupViewData.name;
