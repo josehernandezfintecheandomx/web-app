@@ -161,23 +161,16 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
             }
           }
 
-          if(url !== undefined){
-            if (url.length>8 && url.search("/clients/")>0 ){
-              var replaceGeneral = "/general/";
-              var currentUrlTemp = url.replace(replaceGeneral, "/"); 
-              //console.log("LA URL FINAL ES FIX 1 "+currentUrlTemp);
-              var replaceDoubleSlash = "//";
-              var currentUrlTemp2 = currentUrlTemp.replace(replaceDoubleSlash, "/"); 
-              //console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp2);
-              currentUrlTemp2 += `/general`;
-              //console.log("EL MENU DE CLIENTES CON FIX ES "+currentUrlTemp2);
-              var replaceDoubleSlash2 = "/general/general";
-              var currentUrlTemp3 = currentUrlTemp2.replace(replaceDoubleSlash2, "/general"); 
-              //console.log("LA URL FINAL ES FIX 2 "+currentUrlTemp3);
-              url = currentUrlTemp3; 
-              //console.log("LA URL FINAL FIXED ES "+url);
+          if (url !== undefined) {
+            if (url.length > 8 && url.search(`/clients/`) > 0 ) {
+              const replaceGeneral = `/general/`;
+              let currentUrlTemp = url.replace(replaceGeneral, `/`);
+              currentUrlTemp = currentUrlTemp.replace(`//`, `/`);
+              currentUrlTemp += `/general`;
+              const replaceDoubleSlash = `/general/general`;
+              currentUrlTemp = currentUrlTemp.replace(replaceDoubleSlash, `/general`);
+              url = currentUrlTemp;
             }
-            
           }
 
           const breadcrumb: Breadcrumb = {
