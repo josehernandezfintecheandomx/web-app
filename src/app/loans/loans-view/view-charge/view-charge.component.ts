@@ -116,7 +116,7 @@ export class ViewChargeComponent {
   /**
    * Edits the charge
    */
-  editCharge() {
+   editCharge() {
     const formfields: FormfieldBase[] = [
       new InputBase({
         controlName: 'amount',
