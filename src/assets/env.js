@@ -9,6 +9,7 @@
   window["env"]["apiVersion"]  = '/v1';
 
   window["env"]["fineractPlatformTenantId"]  = 'default';
+  window["env"]["fineractPlatformTenantIds"]  = '';
 
   // Language Environment variables
   window["env"]["defaultLanguage"] = 'en-US';
