@@ -35,8 +35,4 @@ export class TenantSelectorComponent implements OnInit {
     this.settingsService.setTenantIdentifier(this.tenantSelector.value);
   }
 
-  allowSelection(): boolean {
-    return (this.tenants.length > 1);
-  }
-
 }

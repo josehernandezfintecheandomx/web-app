@@ -19,6 +19,7 @@ import { environment } from '../../../environments/environment';
 import { LoginContext } from './login-context.model';
 import { Credentials } from './credentials.model';
 import { OAuth2Token } from './o-auth2-token.model';
+import { SettingsService } from 'app/settings/settings.service';
 
 /**
  * Authentication workflow.
@@ -55,7 +56,8 @@ export class AuthenticationService {
    */
   constructor(private http: HttpClient,
               private alertService: AlertService,
-              private authenticationInterceptor: AuthenticationInterceptor) {
+              private authenticationInterceptor: AuthenticationInterceptor,
+              private settingsService: SettingsService) {
     this.rememberMe = false;
     this.storage = sessionStorage;
     const savedCredentials = JSON.parse(
@@ -84,6 +86,13 @@ export class AuthenticationService {
    * @returns {Observable<boolean>} True if authentication is successful.
    */
   login(loginContext: LoginContext) {
+    let username = loginContext.username;
+    if (loginContext.username.indexOf('\\') > 0) {
+      const values = loginContext.username.split('\\');
+      this.alertService.alert({ type: 'Tenant', message: 'Setting ' + values[0] + ' as Tenant' });
+      this.settingsService.setTenantIdentifier(values[0]);
+      username = values[1];
+    }
     this.alertService.alert({ type: 'Authentication Start', message: 'Please wait...' });
     this.rememberMe = loginContext.remember;
     this.storage = this.rememberMe ? localStorage : sessionStorage;
@@ -101,7 +110,7 @@ export class AuthenticationService {
           })
         );
     } else {
-      return this.http.post('/authentication', { username: loginContext.username, password: loginContext.password })
+      return this.http.post('/authentication', { username: username, password: loginContext.password })
         .pipe(
           map((credentials: Credentials) => {
             this.onLoginSuccess(credentials);
@@ -184,7 +193,7 @@ export class AuthenticationService {
         this.alertService.alert({ type: 'Password Expired', message: 'Your password has expired, please reset your password!' });
       } else {
         this.setCredentials(credentials);
-        this.alertService.alert({ type: 'Authentication Success', message: `${credentials.username} successfully logged in!` });
+        this.alertService.alert({ type: 'Authentication Success', message: `${this.settingsService.tenantIdentifier}\\${credentials.username} successfully logged in!` });
         delete this.credentials;
       }
     }
@@ -305,7 +314,7 @@ export class AuthenticationService {
       this.alertService.alert({ type: 'Password Expired', message: 'Your password has expired, please reset your password!' });
     } else {
       this.setCredentials(this.credentials);
-      this.alertService.alert({ type: 'Authentication Success', message: `${this.credentials.username} successfully logged in!` });
+      this.alertService.alert({ type: 'Authentication Success', message: `${this.settingsService.tenantIdentifier}\\${this.credentials.username} successfully logged in!` });
       delete this.credentials;
       this.storage.setItem(this.twoFactorAuthenticationTokenStorageKey, JSON.stringify(response));
     }

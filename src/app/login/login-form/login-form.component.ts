@@ -24,6 +24,10 @@ export class LoginFormComponent implements OnInit {
   passwordInputType: string;
   /** True if loading. */
   loading = false;
+  /** True If username has Tenant Identifier */
+  usernameWithTenantIdentifier = false;
+  /** Stores Tenant Identifier */
+  tenantIdentifer = '';
 
   /**
    * @param {FormBuilder} formBuilder Form Builder.
@@ -40,6 +44,7 @@ export class LoginFormComponent implements OnInit {
   ngOnInit() {
     this.createLoginForm();
     this.passwordInputType = 'password';
+    this.buildDependencies();
   }
 
   /**
@@ -55,6 +60,7 @@ export class LoginFormComponent implements OnInit {
         // Angular Material Bug: Validation errors won't get removed on reset.
         this.loginForm.enable();
         this.loading = false;
+        this.usernameWithTenantIdentifier = false;
       })).subscribe();
   }
 
@@ -73,6 +79,17 @@ export class LoginFormComponent implements OnInit {
       'username': ['', Validators.required],
       'password': ['', Validators.required],
       'remember': false
+    });
+  }
+
+  private buildDependencies(): void {
+    this.loginForm.get('username').valueChanges.subscribe((username: any) => {
+      this.usernameWithTenantIdentifier = (username.indexOf('\\') > 0);
+      if (this.usernameWithTenantIdentifier) {
+        this.tenantIdentifer = username.split('\\')[0];
+      } else {
+        this.tenantIdentifer = '';
+      }
     });
   }
 

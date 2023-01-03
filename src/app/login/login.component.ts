@@ -13,6 +13,7 @@ import { AlertService } from '../core/alert/alert.service';
 
 /** Environment Imports */
 import { environment } from '../../environments/environment';
+import { SettingsService } from 'app/settings/settings.service';
 
 /**
  * Login component.
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @param {Router} router Router for navigation.
    */
   constructor(private alertService: AlertService,
-              private router: Router) { }
+              private router: Router,
+              private settingsService: SettingsService) { }
 
   /**
    * Subscribes to alert event of alert service.
@@ -65,6 +67,18 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
     this.alert$.unsubscribe();
+  }
+
+  /**
+   * Returns all the languages supported by the application.
+   * @return {string[]} Supported languages.
+   */
+  get tenants(): string[] {
+    return this.settingsService.tenantIdentifiers || [];
+  }
+
+  displayTenantSelector(): boolean {
+    return (this.tenants.length > 1);
   }
 
 }

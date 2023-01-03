@@ -11,6 +11,10 @@
     </mat-error>
   </mat-form-field>
 
+  <div *ngIf="usernameWithTenantIdentifier">
+    <mat-label class="center">{{ 'labels.texts.Login into Tenant' | translate }}: <b>{{ tenantIdentifer }}</b></mat-label>
+  </div>
+
   <mat-form-field fxFlexAlign="center" class="login-input">
     <span matPrefix class="m-r-10">
       <fa-icon icon="lock" size="lg"></fa-icon>
