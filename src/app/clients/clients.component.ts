@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 /** Custom Services */
 import { SearchService } from 'app/search/search.service';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'mifosx-clients',
@@ -16,7 +17,7 @@ import { SearchService } from 'app/search/search.service';
 export class ClientsComponent implements OnInit {
   @ViewChild('showClosedAccounts', { static: true }) showClosedAccounts: MatCheckbox;
 
-  displayedColumns = ['name', 'clientNo', 'externalId', 'status', 'office', 'staff'];
+  displayedColumns = ['entityName', 'entityAccountNo', 'entityExternalId', 'status', 'parentName', 'staffName'];
   dataSource: MatTableDataSource<any>;
 
   existsClientsToFilter = false;
@@ -29,7 +30,9 @@ export class ClientsComponent implements OnInit {
   constructor(private searchService: SearchService) { }
 
   ngOnInit() {
-    this.getClients('');
+    if (environment.preloadClients) {
+      this.getClients('');
+    }
   }
 
   /**
@@ -52,6 +55,8 @@ export class ClientsComponent implements OnInit {
   private getClients(value: string) {
     this.searchService.getSearchResults(value, 'clients').subscribe((data: any) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       this.existsClientsToFilter = (data.length > 0);
       this.notExistsClientsToFilter = !this.existsClientsToFilter;
       this.moreClientsToFilter = (data.length > 50);

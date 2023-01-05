@@ -14,4 +14,6 @@
   // Language Environment variables
   window["env"]["defaultLanguage"] = 'en-US';
   window["env"]["supportedLanguages"] = 'en-US';
+
+  window['env']['preloadClients'] = '';
 })(this);
