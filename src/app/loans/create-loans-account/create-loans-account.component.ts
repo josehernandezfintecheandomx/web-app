@@ -1,5 +1,5 @@
 /** Angular Imports */
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 /** Custom Services */
@@ -11,7 +11,7 @@ import { ClientsService } from 'app/clients/clients.service';
 import { LoansAccountDetailsStepComponent } from '../loans-account-stepper/loans-account-details-step/loans-account-details-step.component';
 import { LoansAccountTermsStepComponent } from '../loans-account-stepper/loans-account-terms-step/loans-account-terms-step.component';
 import { LoansAccountChargesStepComponent } from '../loans-account-stepper/loans-account-charges-step/loans-account-charges-step.component';
-import { Dates } from 'app/core/utils/dates';
+import { LoansAccountDatatableStepComponent } from '../loans-account-stepper/loans-account-datatable-step/loans-account-datatable-step.component';
 
 /**
  * Create loans account
@@ -27,6 +27,8 @@ export class CreateLoansAccountComponent implements OnInit {
   @ViewChild(LoansAccountDetailsStepComponent, { static: true }) loansAccountDetailsStep: LoansAccountDetailsStepComponent;
   @ViewChild(LoansAccountTermsStepComponent, { static: true }) loansAccountTermsStep: LoansAccountTermsStepComponent;
   @ViewChild(LoansAccountChargesStepComponent, { static: true }) loansAccountChargesStep: LoansAccountChargesStepComponent;
+  /** Get handle on dtloan tags in the template */
+  @ViewChildren('dtloan') loanDatatables: QueryList<LoansAccountDatatableStepComponent>;
 
   /** Loans Account Template */
   loansAccountTemplate: any;
@@ -38,19 +40,18 @@ export class CreateLoansAccountComponent implements OnInit {
   multiDisburseLoan: any;
   /** Principal Amount */
   principal: any;
+  datatables: any = [];
 
   /**
    * Sets loans account create form.
    * @param {route} ActivatedRoute Activated Route.
    * @param {router} Router Router.
-   * @param {Dates} dateUtils Date Utils
    * @param {loansService} LoansService Loans Service
    * @param {SettingsService} settingsService Settings Service
    * @param {ClientsService} clientService Client Service
    */
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private dateUtils: Dates,
     private loansService: LoansService,
     private settingsService: SettingsService,
     private clientService: ClientsService
@@ -79,6 +80,17 @@ export class CreateLoansAccountComponent implements OnInit {
     this.loansService.getLoansAccountTemplateResource(entityId, isGroup, productId).subscribe((response: any) => {
       this.multiDisburseLoan = response.multiDisburseLoan;
     });
+    this.setDatatables();
+  }
+
+  setDatatables(): void {
+    this.datatables = [];
+
+    if (this.loansAccountProductTemplate.datatables) {
+      this.loansAccountProductTemplate.datatables.forEach((datatable: any) => {
+        this.datatables.push(datatable);
+      });
+    }
   }
 
   /** Get Loans Account Details Form Data */
@@ -123,6 +135,14 @@ export class CreateLoansAccountComponent implements OnInit {
     const dateFormat = this.settingsService.dateFormat;
     const payload = this.loansService.buildLoanRequestPayload(this.loansAccount, this.loansAccountTemplate,
       this.loansAccountProductTemplate.calendarOptions, locale, dateFormat);
+
+    if (this.loansAccountProductTemplate.datatables && this.loansAccountProductTemplate.datatables.length > 0) {
+      const datatables: any[] = [];
+      this.loanDatatables.forEach((loanDatatable: LoansAccountDatatableStepComponent) => {
+        datatables.push(loanDatatable.payload);
+      });
+      payload['datatables'] = datatables;
+    }
 
     this.loansService.createLoansAccount(payload).subscribe((response: any) => {
       this.router.navigate(['../', response.resourceId, 'general'], { relativeTo: this.route });
