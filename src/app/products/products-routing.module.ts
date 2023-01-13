@@ -112,6 +112,14 @@ import { CreateRangeComponent } from './manage-delinquency-buckets/delinquency-r
 import { CreateBucketComponent } from './manage-delinquency-buckets/delinquency-bucket/create-bucket/create-bucket.component';
 import { EditBucketComponent } from './manage-delinquency-buckets/delinquency-bucket/edit-bucket/edit-bucket.component';
 import { ViewBucketComponent } from './manage-delinquency-buckets/delinquency-bucket/view-bucket/view-bucket.component';
+import { LoanProductDatatablesResolver } from './loan-products/loan-product-datatables.resolver';
+import { GeneralTabComponent } from './loan-products/view-loan-product/general-tab/general-tab.component';
+import { DatatableTabComponent } from './loan-products/view-loan-product/datatable-tab/datatable-tab.component';
+import { LoanProductDatatableResolver } from './loan-products/loan-product-datatable.resolver';
+import { SavingProductDatatableResolver } from './saving-products/saving-product-datatable.resolver';
+import { SavingProductDatatablesResolver } from './saving-products/saving-product-datatables.resolver';
+import { SavingProductGeneralTabComponent } from './saving-products/view-saving-product/saving-product-general-tab/saving-product-general-tab.component';
+import { SavingProductDatatableTabComponent } from './saving-products/view-saving-product/saving-product-datatable-tab/saving-product-datatable-tab.component';
 
 /** Products Routes */
 const routes: Routes = [
@@ -140,22 +148,41 @@ const routes: Routes = [
               component: CreateLoanProductComponent,
               data: { title: extract('Create Loan Product'), breadcrumb: 'Create' },
               resolve: {
-                loanProductsTemplate: LoanProductsTemplateResolver
+                loanProductsTemplate: LoanProductsTemplateResolver,
+                loanProductDatatables: LoanProductDatatablesResolver
               }
             },
             {
-              path: ':id',
-              data: { title: extract('View Loan Product'), routeParamBreadcrumb: 'id' },
+              path: ':productId',
+              component: ViewLoanProductComponent,
               resolve: {
-                loanProduct: LoanProductResolver
+                loanProductDatatables: LoanProductDatatablesResolver
               },
+              data: { title: extract('View Loan Product'), breadcrumb: 'productId', routeParamBreadcrumb: 'productId' },
               children: [
                 {
                   path: '',
-                  component: ViewLoanProductComponent,
+                  redirectTo: 'general',
+                  pathMatch: 'full'
+                },
+                {
+                  path: 'general',
+                  data: { title: extract('General'), breadcrumb: 'General', routeParamBreadcrumb: false },
+                  component: GeneralTabComponent,
                   resolve: {
                     loanProduct: LoanProductResolver
-                  }
+                  },
+                },
+                {
+                  path: 'datatables',
+                  children: [{
+                    path: ':datatableName',
+                    component: DatatableTabComponent,
+                    data: { title: extract('Data Table View'), routeParamBreadcrumb: 'datatableName' },
+                    resolve: {
+                      loanProductDatatable: LoanProductDatatableResolver
+                    }
+                  }]
                 },
                 {
                   path: 'edit',
@@ -185,22 +212,46 @@ const routes: Routes = [
               component: CreateSavingProductComponent,
               data: { title: extract('Create Saving Product'), breadcrumb: 'Create' },
               resolve: {
-                savingProductsTemplate: SavingProductsTemplateResolver
+                savingProductDatatables: SavingProductDatatablesResolver
               }
             },
             {
-              path: ':id',
-              data: { title: extract('View Saving Product'), routeParamBreadcrumb: 'id' },
+              path: ':productId',
+              data: { title: extract('View Saving Product'), breadcrumb: 'productId', routeParamBreadcrumb: 'productId' },
               resolve: {
-                savingProduct: SavingProductResolver
+                savingProductDatatables: SavingProductDatatablesResolver
               },
               children: [
                 {
                   path: '',
                   component: ViewSavingProductComponent,
-                  resolve: {
-                    savingProduct: SavingProductResolver
-                  }
+
+                  children: [
+                    {
+                      path: '',
+                      redirectTo: 'general',
+                      pathMatch: 'full'
+                    },
+                    {
+                      path: 'general',
+                      data: { title: extract('General'), breadcrumb: 'General', routeParamBreadcrumb: false },
+                      component: SavingProductGeneralTabComponent,
+                      resolve: {
+                        savingProduct: SavingProductResolver
+                      },
+                    },
+                    {
+                      path: 'datatables',
+                      children: [{
+                        path: ':datatableName',
+                        component: SavingProductDatatableTabComponent,
+                        data: { title: extract('Data Table View'), routeParamBreadcrumb: 'datatableName' },
+                        resolve: {
+                          savingProductDatatable: SavingProductDatatableResolver
+                        }
+                      }]
+                    }
+                  ]
                 },
                 {
                   path: 'edit',
@@ -211,7 +262,7 @@ const routes: Routes = [
                   }
                 }
               ]
-            }
+            },
           ]
         },
         {
@@ -257,7 +308,7 @@ const routes: Routes = [
                 },
                 {
                   path: 'dividends',
-                  data: { title: extract('Share Products Dividends'), breadcrumb: 'Dividends', routeParamBreadcrumb: false},
+                  data: { title: extract('Share Products Dividends'), breadcrumb: 'Dividends', routeParamBreadcrumb: false },
                   children: [
                     {
                       path: '',
@@ -290,7 +341,7 @@ const routes: Routes = [
         },
         {
           path: 'tax-configurations',
-          data: { title:  extract('Manage Tax Configurations'), breadcrumb: 'Manage Tax Configurations' },
+          data: { title: extract('Manage Tax Configurations'), breadcrumb: 'Manage Tax Configurations' },
           children: [
             {
               path: '',
@@ -298,7 +349,7 @@ const routes: Routes = [
             },
             {
               path: 'tax-components',
-              data: { title: extract('Manage Tax Components'), breadcrumb: 'Tax Components'},
+              data: { title: extract('Manage Tax Components'), breadcrumb: 'Tax Components' },
               children: [
                 {
                   path: '',
@@ -331,7 +382,7 @@ const routes: Routes = [
                     },
                     {
                       path: 'edit',
-                      data: { title: extract('Edit Tax Component'), breadcrumb: 'Edit', routeParamBreadcrumb: false  },
+                      data: { title: extract('Edit Tax Component'), breadcrumb: 'Edit', routeParamBreadcrumb: false },
                       component: EditTaxComponentComponent,
                       resolve: {
                         taxComponent: TaxComponentResolver
@@ -343,13 +394,13 @@ const routes: Routes = [
             },
             {
               path: 'tax-groups',
-              data: { title: extract('Manage Tax Groups'), breadcrumb: 'Tax Groups'},
+              data: { title: extract('Manage Tax Groups'), breadcrumb: 'Tax Groups' },
               children: [
                 {
                   path: '',
                   component: ManageTaxGroupsComponent,
                   resolve: {
-                  taxGroups: ManageTaxGroupsResolver
+                    taxGroups: ManageTaxGroupsResolver
                   }
                 },
                 {
@@ -390,7 +441,7 @@ const routes: Routes = [
         },
         {
           path: 'delinquency-bucket-configurations',
-          data: { title:  extract('Manage Delinquency Bucket Configurations'), breadcrumb: 'Manage Delinquency Bucket Configurations' },
+          data: { title: extract('Manage Delinquency Bucket Configurations'), breadcrumb: 'Manage Delinquency Bucket Configurations' },
           children: [
             {
               path: '',
@@ -398,7 +449,7 @@ const routes: Routes = [
             },
             {
               path: 'ranges',
-              data: { title: extract('Manage Delinquency Ranges'), breadcrumb: 'Delinquency Ranges'},
+              data: { title: extract('Manage Delinquency Ranges'), breadcrumb: 'Delinquency Ranges' },
               children: [
                 {
                   path: '',
@@ -440,7 +491,7 @@ const routes: Routes = [
             },
             {
               path: 'buckets',
-              data: { title: extract('Manage Delinquency Bucket'), breadcrumb: 'Delinquency Buckets'},
+              data: { title: extract('Manage Delinquency Bucket'), breadcrumb: 'Delinquency Buckets' },
               children: [
                 {
                   path: '',
@@ -488,7 +539,7 @@ const routes: Routes = [
         },
         {
           path: 'recurring-deposit-products',
-          data: { title:  extract('Recurring Deposit Products'), breadcrumb: 'Recurring Deposit Products' },
+          data: { title: extract('Recurring Deposit Products'), breadcrumb: 'Recurring Deposit Products' },
           children: [
             {
               path: 'create',
@@ -534,7 +585,7 @@ const routes: Routes = [
         },
         {
           path: 'fixed-deposit-products',
-          data: { title:  extract('Fixed Deposit Products'), breadcrumb: 'Fixed Deposit Products' },
+          data: { title: extract('Fixed Deposit Products'), breadcrumb: 'Fixed Deposit Products' },
           children: [
             {
               path: 'create',
@@ -580,7 +631,7 @@ const routes: Routes = [
         },
         {
           path: 'products-mix',
-          data: { title:  extract('Products Mix'), breadcrumb: 'Products Mix' },
+          data: { title: extract('Products Mix'), breadcrumb: 'Products Mix' },
           children: [
             {
               path: 'create',
@@ -599,7 +650,7 @@ const routes: Routes = [
             },
             {
               path: ':id',
-              data: { title: extract('View Product Mix'), routeParamBreadcrumb: 'id'},
+              data: { title: extract('View Product Mix'), routeParamBreadcrumb: 'id' },
               resolve: {
                 productMix: ViewProductMixResolver
               },
@@ -758,7 +809,8 @@ const routes: Routes = [
         }
       ]
     }
-  ])
+  ]
+  )
 ];
 
 /**
