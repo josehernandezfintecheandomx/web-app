@@ -62,17 +62,32 @@
           </mat-form-field>
 
           <mat-form-field>
+            <mat-label>Payment Strategy</mat-label>
+            <mat-select required formControlName="paymentStrategyId">
+              <mat-option *ngFor="let paymentStrategy of paymentStrategyOptions" [value]="paymentStrategy.id">
+                {{ paymentStrategy.value }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="repaymentLoanForm.controls.paymentStrategyId.hasError('required')">
+              Payment Strategy <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
             <mat-label>External Id</mat-label>
             <input matInput formControlName="externalId">
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Payment Type</mat-label>
-            <mat-select formControlName="paymentTypeId">
+            <mat-select required formControlName="paymentTypeId">
               <mat-option *ngFor="let paymentType of paymentTypes" [value]="paymentType.id">
                 {{ paymentType.name }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="repaymentLoanForm.controls.paymentTypeId.hasError('required')">
+              Payment Type <strong>required</strong>
+            </mat-error>
           </mat-form-field>
 
           <div fxFlexFill>
