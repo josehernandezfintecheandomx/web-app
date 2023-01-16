@@ -23,6 +23,8 @@ export class MakeRepaymentComponent implements OnInit {
   loanId: string;
   /** Payment Type Options */
   paymentTypes: any;
+  /** Payment Strategies Options */
+  paymentStrategyOptions: any;
   /** Show payment details */
   showPaymentDetails = false;
   /** Minimum Date allowed. */
@@ -66,13 +68,15 @@ export class MakeRepaymentComponent implements OnInit {
       'transactionDate': [new Date(), Validators.required],
       'transactionAmount': ['', Validators.required],
       'externalId': '',
-      'paymentTypeId': '',
+      'paymentTypeId': ['', Validators.required],
+      'paymentStrategyId': [1, Validators.required],
       'note': ''
     });
   }
 
   setRepaymentLoanDetails() {
     this.paymentTypes = this.dataObject.paymentTypeOptions;
+    this.paymentStrategyOptions = this.dataObject.paymentStrategyOptions;
     this.repaymentLoanForm.patchValue({
       transactionAmount: this.dataObject.amount
     });
