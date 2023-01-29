@@ -87,6 +87,7 @@ export class MakeRepaymentComponent implements OnInit {
    */
   addPaymentDetails() {
     this.showPaymentDetails = !this.showPaymentDetails;
+    console.log(this.showPaymentDetails);
     if (this.showPaymentDetails) {
       this.repaymentLoanForm.addControl('accountNumber', new FormControl(''));
       this.repaymentLoanForm.addControl('checkNumber', new FormControl(''));
