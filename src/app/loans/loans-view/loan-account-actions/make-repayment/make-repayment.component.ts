@@ -77,6 +77,9 @@ export class MakeRepaymentComponent implements OnInit {
   setRepaymentLoanDetails() {
     this.paymentTypes = this.dataObject.paymentTypeOptions;
     this.paymentStrategyOptions = this.dataObject.paymentStrategyOptions;
+    if (this.dataObject.inArrears) {
+      this.paymentStrategyOptions = [this.paymentStrategyOptions[0]];
+    }
     this.repaymentLoanForm.patchValue({
       transactionAmount: this.dataObject.amount
     });
