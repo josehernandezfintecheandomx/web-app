@@ -122,6 +122,14 @@
 
         <ng-container *ngIf="transactionData.paymentDetailData">
 
+          <div *ngIf="transactionData.paymentDetailData.paymentStrategy" fxFlex="50%" class="mat-body-strong">
+            {{ 'Payment Strategy' | translate }}
+          </div>
+
+          <div *ngIf="transactionData.paymentDetailData.paymentStrategy" fxFlex="50%">
+            {{ transactionData.paymentDetailData.paymentStrategy | translate}}
+          </div>
+
           <div *ngIf="transactionData.paymentDetailData.paymentType" fxFlex="50%" class="mat-body-strong">
             {{ 'Payment Type' | translate }}
           </div>

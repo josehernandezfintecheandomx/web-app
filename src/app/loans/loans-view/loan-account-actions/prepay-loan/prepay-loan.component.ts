@@ -36,6 +36,8 @@ export class PrepayLoanComponent implements OnInit {
   maxDate = new Date();
   /** Prepay Loan form. */
   prepayLoanForm: FormGroup;
+  /** Payment Strategies Options */
+  paymentStrategyOptions: any;
 
   prepayData: any;
 
@@ -64,6 +66,7 @@ export class PrepayLoanComponent implements OnInit {
     this.createprepayLoanForm();
     this.setPrepayLoanDetails();
     this.prepayData = this.dataObject;
+    this.paymentStrategyOptions = this.dataObject.paymentStrategyOptions.slice(1, 2);
   }
 
   /**
@@ -71,10 +74,11 @@ export class PrepayLoanComponent implements OnInit {
    */
   createprepayLoanForm() {
     this.prepayLoanForm = this.formBuilder.group({
-      'transactionDate': [new Date(), Validators.required],
+      'transactionDate': [this.settingsService.businessDate, Validators.required],
       'transactionAmount': ['', Validators.required],
       'externalId': [''],
       'paymentTypeId': [''],
+      'paymentStrategyId': [1, Validators.required],
       'note': ['']
     });
   }

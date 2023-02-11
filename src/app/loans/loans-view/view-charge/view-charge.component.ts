@@ -45,11 +45,11 @@ export class ViewChargeComponent {
    * @param {SettingsService} settingsService Settings Service
    */
   constructor(private loansService: LoansService,
-              private route: ActivatedRoute,
-              private dateUtils: Dates,
-              private router: Router,
-              public dialog: MatDialog,
-              private settingsService: SettingsService) {
+    private route: ActivatedRoute,
+    private dateUtils: Dates,
+    private router: Router,
+    public dialog: MatDialog,
+    private settingsService: SettingsService) {
     this.route.data.subscribe((data: { loansAccountCharge: any, loanDetailsData: any }) => {
       this.chargeData = data.loansAccountCharge;
       this.allowPayCharge = (this.chargeData.chargePayable && !this.chargeData.paid);
@@ -113,7 +113,7 @@ export class ViewChargeComponent {
   /**
    * Edits the charge
    */
-   editCharge() {
+  editCharge() {
     const formfields: FormfieldBase[] = [
       new InputBase({
         controlName: 'amount',
