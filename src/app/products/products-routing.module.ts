@@ -215,6 +215,7 @@ const routes: Routes = [
               component: CreateSavingProductComponent,
               data: { title: extract('Create Saving Product'), breadcrumb: 'Create' },
               resolve: {
+                savingProductsTemplate: SavingProductsTemplateResolver,
                 savingProductDatatables: SavingProductDatatablesResolver
               }
             },
