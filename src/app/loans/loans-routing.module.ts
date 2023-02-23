@@ -55,6 +55,7 @@ import { LoanDelinquencyTagsResolver } from './common-resolvers/loan-delinquency
 import { LoanDelinquencyTagsTabComponent } from './loans-view/loan-delinquency-tags-tab/loan-delinquency-tags-tab.component';
 import { LoanReschedulesResolver } from './common-resolvers/loan-reschedules.resolver';
 import { RescheduleLoanTabComponent } from './loans-view/reschedule-loan-tab/reschedule-loan-tab.component';
+import { AdjustLoanChargeComponent } from './loans-view/loan-account-actions/adjust-loan-charge/adjust-loan-charge.component';
 
 /** Loans Route. */
 const routes: Routes = [
@@ -242,6 +243,14 @@ const routes: Routes = [
         ]
       },
       {
+        path: ':loanId/edit-loans-account',
+        data: { title: extract('Modify Loans Account'), breadcrumb: 'Modify Loans Account', routeParamBreadcrumb: 'Edit' },
+        component: EditLoansAccountComponent,
+        resolve: {
+          loansAccountAndTemplate: LoansAccountAndTemplateResolver
+        }
+      },
+      {
         path: ':loanId/charges',
         data: { title: extract('Loans Account Charges'), breadcrumb: 'Charges', routeParamBreadcrumb: false },
         children: [
@@ -253,6 +262,15 @@ const routes: Routes = [
             path: ':id',
             data: { routeParamBreadcrumb: 'id' },
             component: ViewChargeComponent,
+            resolve: {
+              loansAccountCharge: LoansAccountChargeResolver,
+              loanDetailsData: LoanDetailsResolver
+            }
+          },
+          {
+            path: ':id/adjustment',
+            data: { routeParamBreadcrumb: 'id', breadcrumb: 'Adjustment' },
+            component: AdjustLoanChargeComponent,
             resolve: {
               loansAccountCharge: LoansAccountChargeResolver,
               loanDetailsData: LoanDetailsResolver

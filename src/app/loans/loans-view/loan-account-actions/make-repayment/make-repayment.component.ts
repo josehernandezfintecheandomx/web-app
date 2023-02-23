@@ -65,7 +65,7 @@ export class MakeRepaymentComponent implements OnInit {
    */
   createRepaymentLoanForm() {
     this.repaymentLoanForm = this.formBuilder.group({
-      'transactionDate': [new Date(), Validators.required],
+      'transactionDate': [this.settingsService.businessDate, Validators.required],
       'transactionAmount': ['', Validators.required],
       'externalId': '',
       'paymentTypeId': ['', Validators.required],
@@ -90,7 +90,6 @@ export class MakeRepaymentComponent implements OnInit {
    */
   addPaymentDetails() {
     this.showPaymentDetails = !this.showPaymentDetails;
-    console.log(this.showPaymentDetails);
     if (this.showPaymentDetails) {
       this.repaymentLoanForm.addControl('accountNumber', new FormControl(''));
       this.repaymentLoanForm.addControl('checkNumber', new FormControl(''));
