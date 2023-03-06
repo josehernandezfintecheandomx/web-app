@@ -184,6 +184,10 @@
 
     <div *ngIf="loanProductSettingsForm.value.isInterestRecalculationEnabled" fxFlexFill fxLayout="row wrap" fxLayoutGap="2%" fxLayout.lt-md="column">
 
+      <mat-checkbox fxFlex="73%" labelPosition="before" formControlName="passRecalcOnRepayment" class="margin-b">
+        Pass the Interest Recalculation on Repayment
+      </mat-checkbox>
+
       <mat-form-field fxFlex="48%">
         <mat-label>Pre-closure interest calculation rule</mat-label>
         <mat-select formControlName="preClosureInterestCalculationStrategy" required>
@@ -220,8 +224,6 @@
         </mat-error>
       </mat-form-field>
 
-      <span fxFlex="48%" fxHide.lt-md></span>
-
       <div fxFlexFill fxLayout="row wrap" fxLayoutGap="2%" fxLayout.lt-md="column">
 
         <mat-form-field fxFlex="48%" *ngIf="loanProductSettingsForm.value.interestRecalculationCompoundingMethod !== 0 && loanProductSettingsForm.value.recalculationCompoundingFrequencyType !== 1">
@@ -239,7 +241,6 @@
             Frequency Interval for recalculation is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-
       </div>
 
       <div *ngIf="loanProductSettingsForm.value.interestRecalculationCompoundingMethod !== 0" fxFlexFill fxLayout="row wrap" fxLayoutGap="2%" fxLayout.lt-md="column">

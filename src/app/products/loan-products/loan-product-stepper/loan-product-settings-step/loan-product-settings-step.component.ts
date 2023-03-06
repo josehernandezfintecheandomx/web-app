@@ -86,6 +86,7 @@ export class LoanProductSettingsStepComponent implements OnInit {
       'multiDisburseLoan': this.loanProductsTemplate.multiDisburseLoan,
       'maxTrancheCount': this.loanProductsTemplate.maxTrancheCount,
       'outstandingLoanBalance': this.loanProductsTemplate.outstandingLoanBalance,
+      'passRecalcOnRepayment': this.loanProductsTemplate.passRecalcOnRepayment
     });
 
     if (this.loanProductsTemplate.delinquencyBucket) {
@@ -170,6 +171,7 @@ export class LoanProductSettingsStepComponent implements OnInit {
       'holdGuaranteeFunds': [false],
       'multiDisburseLoan': [false],
       'allowAttributeConfiguration': [true],
+      'passRecalcOnRepayment': [false],
       'allowAttributeOverrides': this.formBuilder.group({
         'amortizationType': [true],
         'interestType': [true],

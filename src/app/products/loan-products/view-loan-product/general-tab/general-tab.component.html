@@ -405,6 +405,8 @@
   </div>
 
   <div fxFlexFill *ngIf="loanProduct.isInterestRecalculationEnabled" fxLayout="row wrap" fxLayout.lt-md="column">
+    <span fxFlex="40%">Pass the Interest Recalculation on Repayment:</span>
+    <span fxFlex="60%">{{ loanProduct.passRecalcOnRepayment ? 'Yes' : 'No' }}</span>
     <span fxFlex="40%">Pre-closure interest calculation rule:</span>
     <span fxFlex="60%">{{ loanProduct.interestRecalculationData.preClosureInterestCalculationStrategy.value }}</span>
     <span fxFlex="40%">Advance payments adjustment type:</span>
