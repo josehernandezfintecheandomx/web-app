@@ -69,17 +69,13 @@ export class MakeRepaymentComponent implements OnInit {
       'transactionAmount': ['', Validators.required],
       'externalId': '',
       'paymentTypeId': ['', Validators.required],
-      'paymentStrategyId': [1, Validators.required],
       'note': ''
     });
   }
 
   setRepaymentLoanDetails() {
     this.paymentTypes = this.dataObject.paymentTypeOptions;
-    this.paymentStrategyOptions = this.dataObject.paymentStrategyOptions.slice(1, 3);
-    if (this.dataObject.inArrears) {
-      this.paymentStrategyOptions = this.dataObject.paymentStrategyOptions.slice(1, 2);
-    }
+
     this.repaymentLoanForm.patchValue({
       transactionAmount: this.dataObject.amount
     });
