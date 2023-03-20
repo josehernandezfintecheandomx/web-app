@@ -110,8 +110,10 @@ export class MakeRepaymentComponent implements OnInit {
     if (repaymentLoanFormData.transactionDate instanceof Date) {
       repaymentLoanFormData.transactionDate = this.dateUtils.formatDate(prevTransactionDate, dateFormat);
     }
+    const isPrepay = false;
     const data = {
       ...repaymentLoanFormData,
+      isPrepay,
       dateFormat,
       locale
     };
