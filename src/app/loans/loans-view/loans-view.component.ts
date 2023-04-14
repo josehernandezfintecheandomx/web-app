@@ -47,10 +47,10 @@ export class LoansViewComponent implements OnInit {
               private router: Router,
               public loansService: LoansService,
               public dialog: MatDialog) {
-    this.route.data.subscribe((data: { loanDetailsData: any, loanDatatables: any, loanArrearsDelinquencyConfig: any}) => {
+    this.route.data.subscribe((data: { loanDetailsData: any, loanDatatables: any }) => {
       this.loanDetailsData = data.loanDetailsData;
       this.loanDatatables = data.loanDatatables;
-      this.loanDisplayArrearsDelinquency = data.loanArrearsDelinquencyConfig.value || 0;
+      this.loanDisplayArrearsDelinquency = 0;
       this.loanStatus = this.loanDetailsData.status;
     });
     this.loanId = this.route.snapshot.params['loanId'];
