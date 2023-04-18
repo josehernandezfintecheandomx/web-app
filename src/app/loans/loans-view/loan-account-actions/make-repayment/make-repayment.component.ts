@@ -113,7 +113,6 @@ export class MakeRepaymentComponent implements OnInit {
     const isPrepay = false;
     const data = {
       ...repaymentLoanFormData,
-      isPrepay,
       dateFormat,
       locale
     };

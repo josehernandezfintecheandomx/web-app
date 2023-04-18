@@ -137,7 +137,6 @@ export class PrepayLoanComponent implements OnInit {
     const isPrepay = true;
     const data = {
       ...prepayLoanFormData,
-      isPrepay,
       dateFormat,
       locale
     };
