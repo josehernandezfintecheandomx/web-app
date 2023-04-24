@@ -186,17 +186,12 @@ export class EditChargeComponent implements OnInit {
    * Submits Edit Charge form.
    */
   submit() {
-    const chargeData = this.chargeForm.getRawValue();
-    const locale = this.settingsService.language.code;
-    chargeData.chargePaymentMode = this.chargeData.chargePaymentMode.id;
-    if (chargeData.taxGroupId === '') {
-      delete chargeData.taxGroupId;
+    const charges = this.chargeForm.getRawValue();
+    charges.locale = this.settingsService.language.code;
+    if (charges.taxGroupId.value === '') {
+      delete charges.taxGroupId;
     }
-    const data = {
-      ...chargeData,
-      locale
-    };
-    this.productsService.updateCharge(this.chargeData.id.toString(), data)
+    this.productsService.updateCharge(this.chargeData.id.toString(), charges)
       .subscribe((response: any) => {
         this.router.navigate(['../'], { relativeTo: this.route });
       });
