@@ -139,6 +139,7 @@ export class EditChargeComponent implements OnInit {
       this.chargeForm.addControl('taxGroupId', this.formBuilder.control({ value: this.chargeData.taxGroup.id, disabled: true }));
     } else {
       this.chargeForm.addControl('taxGroupId', this.formBuilder.control({ value: '' }));
+<<<<<<< HEAD
     }
 
     this.chargeForm.get('chargeTimeType').valueChanges.subscribe((chargeTimeType) => {
@@ -165,6 +166,8 @@ export class EditChargeComponent implements OnInit {
       this.chargeForm.addControl('incomeAccountId', this.formBuilder.control(this.chargeData.incomeOrLiabilityAccount.id, Validators.required));
     } else {
       this.chargeForm.removeControl('incomeAccountId');
+=======
+>>>>>>> upstream_master
     }
   }
 
@@ -186,17 +189,12 @@ export class EditChargeComponent implements OnInit {
    * Submits Edit Charge form.
    */
   submit() {
-    const chargeData = this.chargeForm.getRawValue();
-    const locale = this.settingsService.language.code;
-    chargeData.chargePaymentMode = this.chargeData.chargePaymentMode.id;
-    if (chargeData.taxGroupId === '') {
-      delete chargeData.taxGroupId;
+    const charges = this.chargeForm.getRawValue();
+    charges.locale = this.settingsService.language.code;
+    if (charges.taxGroupId.value === '') {
+      delete charges.taxGroupId;
     }
-    const data = {
-      ...chargeData,
-      locale
-    };
-    this.productsService.updateCharge(this.chargeData.id.toString(), data)
+    this.productsService.updateCharge(this.chargeData.id.toString(), charges)
       .subscribe((response: any) => {
         this.router.navigate(['../'], { relativeTo: this.route });
       });
