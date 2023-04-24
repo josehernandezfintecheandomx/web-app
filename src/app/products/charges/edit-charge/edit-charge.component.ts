@@ -139,7 +139,6 @@ export class EditChargeComponent implements OnInit {
       this.chargeForm.addControl('taxGroupId', this.formBuilder.control({ value: this.chargeData.taxGroup.id, disabled: true }));
     } else {
       this.chargeForm.addControl('taxGroupId', this.formBuilder.control({ value: '' }));
-<<<<<<< HEAD
     }
 
     this.chargeForm.get('chargeTimeType').valueChanges.subscribe((chargeTimeType) => {
@@ -166,8 +165,6 @@ export class EditChargeComponent implements OnInit {
       this.chargeForm.addControl('incomeAccountId', this.formBuilder.control(this.chargeData.incomeOrLiabilityAccount.id, Validators.required));
     } else {
       this.chargeForm.removeControl('incomeAccountId');
-=======
->>>>>>> upstream_master
     }
   }
 
