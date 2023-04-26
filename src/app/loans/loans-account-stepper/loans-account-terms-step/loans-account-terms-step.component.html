@@ -211,6 +211,11 @@
       <input type="number" matInput formControlName="fixedEmiAmount">
     </mat-form-field>
 
+    <mat-form-field fxFlex="48%">
+      <mat-label>Balloon Repayment Amount</mat-label>
+      <input type="number" matInput formControlName="balloonRepaymentAmount">
+    </mat-form-field>
+
     <ng-container *ngIf="loansAccountTermsData?.canUseForTopup">
 
       <mat-checkbox fxFlex="48%" formControlName="isTopup">

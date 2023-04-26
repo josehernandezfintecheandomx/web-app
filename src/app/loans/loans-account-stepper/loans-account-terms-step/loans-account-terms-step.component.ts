@@ -125,6 +125,7 @@ export class LoansAccountTermsStepComponent implements OnInit, OnChanges {
         'graceOnArrearsAgeing': this.loansAccountTermsData.graceOnArrearsAgeing,
         'graceOnInterestCharged': this.loansAccountTermsData.graceOnInterestCharged,
         'fixedEmiAmount': this.loansAccountTermsData.fixedEmiAmount,
+        'balloonRepaymentAmount': this.loansAccountTermsData.balloonRepaymentAmount || 0,
         'maxOutstandingLoanBalance': this.loansAccountTermsData.maxOutstandingLoanBalance,
         'transactionProcessingStrategyCode': this.loansAccountTermsData.transactionProcessingStrategyCode
       });
@@ -207,6 +208,7 @@ export class LoansAccountTermsStepComponent implements OnInit, OnChanges {
         'graceOnArrearsAgeing': this.loansAccountTermsData.graceOnArrearsAgeing,
         'graceOnInterestCharged': this.loansAccountTermsData.graceOnInterestCharged,
         'fixedEmiAmount': this.loansAccountTermsData.fixedEmiAmount,
+        'balloonRepaymentAmount': this.loansAccountTermsData.balloonRepaymentAmount || 0,
         'maxOutstandingLoanBalance': this.loansAccountTermsData.maxOutstandingLoanBalance,
         'transactionProcessingStrategyCode': this.loansAccountTermsData.transactionProcessingStrategyCode
       });
@@ -267,6 +269,7 @@ export class LoansAccountTermsStepComponent implements OnInit, OnChanges {
       'graceOnArrearsAgeing': [''],
       'loanIdToClose': [''],
       'fixedEmiAmount': [''],
+      'balloonRepaymentAmount': [0],
       'isTopup': [''],
       'maxOutstandingLoanBalance': [''],
       'transactionProcessingStrategyCode': ['', Validators.required]
