@@ -48,6 +48,7 @@ export class EditChargeComponent implements OnInit {
   isCapitalized = false;
 
   incomeOrAssetAccountOptions: any = [];
+  chargeAppliesTo: number;
 
   /**
    * Retrieves the charge data from `resolve`.
@@ -70,9 +71,11 @@ export class EditChargeComponent implements OnInit {
   ngOnInit() {
     this.editChargeForm();
     this.incomeOrAssetAccountOptions = this.chargeData.assetAccountOptions;
-    this.chargeData.incomeOrLiabilityAccountOptions.incomeAccountOptions.forEach((account: any) => {
-      this.incomeOrAssetAccountOptions.push(account);
-    });
+    if (this.chargeData.incomeOrLiabilityAccountOptions.incomeAccountOptions) {
+      this.chargeData.incomeOrLiabilityAccountOptions.incomeAccountOptions.forEach((account: any) => {
+        this.incomeOrAssetAccountOptions.push(account);
+      });
+    }
   }
 
   /**
@@ -90,6 +93,13 @@ export class EditChargeComponent implements OnInit {
       'chargeTimeType': [this.chargeData.chargeTimeType.id, Validators.required],
       'chargeCalculationType': [this.chargeData.chargeCalculationType.id, Validators.required],
     });
+    this.chargeAppliesTo = this.chargeData.chargeAppliesTo.id;
+    this.showCapitalized = (this.chargeAppliesTo == 1 && this.chargeData.chargeTimeType.id == 1);
+    if (this.showCapitalized) {
+      this.chargeForm.addControl('capitalized', new FormControl(this.chargeData.capitalized || false));
+    } else {
+      this.chargeForm.removeControl('capitalized');
+    }
     switch (this.chargeData.chargeAppliesTo.value) {
       case 'Loan': {
         this.chargeTimeTypeOptions = this.chargeData.loanChargeTimeTypeOptions;
@@ -104,8 +114,8 @@ export class EditChargeComponent implements OnInit {
             'feeFrequency': this.chargeData.feeFrequency.id
           });
         }
-        this.chargeForm.addControl('thirdpartyTransfer', new FormControl(this.chargeData.thirdpartyTransfer, Validators.required));
-        this.chargeForm.addControl('dueOnPrepay', new FormControl(this.chargeData.dueOnPrepay, Validators.required));
+        this.chargeForm.addControl('thirdpartyTransfer', new FormControl(this.chargeData.thirdpartyTransfer));
+        this.chargeForm.addControl('dueOnPrepay', new FormControl(this.chargeData.dueOnPrepay));
         this.evalThirdParty(this.chargeData.thirdpartyTransfer);
 
         this.showCapitalized = (this.chargeData.chargeAppliesTo.id === 1 && this.chargeData.chargeTimeType.id === 1);
@@ -191,6 +201,11 @@ export class EditChargeComponent implements OnInit {
     if (charges.taxGroupId.value === '') {
       delete charges.taxGroupId;
     }
+    delete charges.dueOnPrepay;
+    delete charges.thirdpartyTransfer;
+    delete charges.capitalized;
+    delete charges.collectedAtDisburse;
+    delete charges.includeFeeInOutstanding;
     this.productsService.updateCharge(this.chargeData.id.toString(), charges)
       .subscribe((response: any) => {
         this.router.navigate(['../'], { relativeTo: this.route });
