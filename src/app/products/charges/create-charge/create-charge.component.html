@@ -80,7 +80,7 @@
               </mat-error>
             </mat-form-field>
 
-            <div fxFlex="48%" *ngIf="chargeForm.controls.chargeTimeType.value === 9" class="add-fee-frequency-wrapper">
+            <div fxFlex="48%" *ngIf="chargeForm.controls.chargeTimeType.value === 9" class="check-wrapper">
               <mat-checkbox labelPosition="after" formControlName="addFeeFrequency">
                 Add Fee Frequency
               </mat-checkbox>
@@ -157,28 +157,37 @@
               <input matInput formControlName="maxCap">
             </mat-form-field>
 
-            <div fxFlex="48%" *ngIf="chargeForm.controls.chargeAppliesTo.value === 1">
-              <mat-checkbox labelPosition="after" formControlName="thirdpartyTransfer">
-                Thirdparty Transfer
-              </mat-checkbox>
-            </div>
-
-            <div fxFlex="48%" *ngIf="chargeForm.controls.chargeAppliesTo.value === 1">
-              <mat-checkbox labelPosition="after" formControlName="dueOnPrepay">
-                Due on Prepay
-              </mat-checkbox>
-            </div>
-
             <div fxFlex="48%" fxLayout="row" fxLayoutGap="2%" fxLayout.lt-md="column">
-              <div fxFlex="50%" class="active-wrapper">
+
+              <div fxFlex="98%" class="check-wrapper">
                 <mat-checkbox labelPosition="after" formControlName="active">
                   Active
                 </mat-checkbox>
               </div>
+              <br />
 
-              <div fxFlex="50%" class="penalty-wrapper">
+              <div fxFlex="98%" class="check-wrapper">
                 <mat-checkbox labelPosition="after" formControlName="penalty">
                   Is Penalty
+                </mat-checkbox>
+              </div>
+              <br />
+
+              <div fxFlex="98%" class="check-wrapper" *ngIf="showCapitalized">
+                <mat-checkbox labelPosition="after" formControlName="capitalized">
+                  Is Capitalized ?
+                </mat-checkbox>
+              </div>
+
+              <div fxFlex="98%" class="check-wrapper" *ngIf="chargeForm.controls.chargeAppliesTo.value === 1">
+                <mat-checkbox labelPosition="after" formControlName="thirdpartyTransfer">
+                  Thirdparty Transfer
+                </mat-checkbox>
+              </div>
+
+              <div fxFlex="98%" class="check-wrapper" *ngIf="chargeForm.controls.chargeAppliesTo.value === 1">
+                <mat-checkbox labelPosition="after" formControlName="dueOnPrepay">
+                  Due on Prepay
                 </mat-checkbox>
               </div>
             </div>

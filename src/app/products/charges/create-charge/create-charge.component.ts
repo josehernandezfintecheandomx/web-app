@@ -36,6 +36,8 @@ export class CreateChargeComponent implements OnInit {
   repeatEveryLabel: string;
   /** Currency decimal places */
   currencyDecimalPlaces: number;
+  chargeAppliesTo: number;
+  showCapitalized = false;
 
   /**
    * Retrieves the charges template data and income and liability account data from `resolve`.
@@ -96,6 +98,7 @@ export class CreateChargeComponent implements OnInit {
    */
   setChargeForm() {
     this.chargeForm.get('chargeAppliesTo').valueChanges.subscribe((chargeAppliesTo) => {
+      this.chargeAppliesTo = chargeAppliesTo;
       switch (chargeAppliesTo) {
         case 1:
           this.chargeCalculationTypeData = this.chargesTemplateData.loanChargeCalculationTypeOptions;
@@ -176,6 +179,12 @@ export class CreateChargeComponent implements OnInit {
       if (this.chargeForm.get('chargeAppliesTo').value !== 4) {
         this.chargeForm.get('penalty').enable();
       }
+      this.showCapitalized = (this.chargeAppliesTo == 1 && chargeTimeType == 1);
+      if (this.showCapitalized) {
+        this.chargeForm.addControl('capitalized', new FormControl(false, Validators.required));
+      } else {
+        this.chargeForm.removeControl('capitalized');
+      }
       switch (chargeTimeType) {
         case 6: // Annual Fee
           this.chargeForm.addControl('feeOnMonthDay', new FormControl('', Validators.required));
@@ -232,6 +241,9 @@ export class CreateChargeComponent implements OnInit {
       locale
     };
     delete data.addFeeFrequency;
+    delete data.dueOnPrepay;
+    delete data.thirdpartyTransfer;
+    delete data.capitalized;
     if (!data.taxGroupId) {
       delete data.taxGroupId;
     }
