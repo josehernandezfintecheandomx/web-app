@@ -35,6 +35,8 @@ import { DirectivesModule } from 'app/directives/directives.module';
 import { EntityDatatableTabComponent } from './tabs/entity-datatable-tab/entity-datatable-tab.component';
 import { DatatableSingleRowComponent } from './tabs/entity-datatable-tab/datatable-single-row/datatable-single-row.component';
 import { DatatableMultiRowComponent } from './tabs/entity-datatable-tab/datatable-multi-row/datatable-multi-row.component';
+import { SvgIconComponent } from './svg-icon/svg-icon.component';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
 /**
  * Shared Module
@@ -49,7 +51,9 @@ import { DatatableMultiRowComponent } from './tabs/entity-datatable-tab/datatabl
     ReactiveFormsModule,
     TranslateModule.forRoot(),
     PipesModule,
-    DirectivesModule
+    DirectivesModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule
   ],
   declarations: [
     FormfieldComponent,
@@ -75,7 +79,8 @@ import { DatatableMultiRowComponent } from './tabs/entity-datatable-tab/datatabl
     EntityDocumentsTabComponent,
     EntityDatatableTabComponent,
     DatatableSingleRowComponent,
-    DatatableMultiRowComponent
+    DatatableMultiRowComponent,
+    SvgIconComponent
   ],
   exports: [
     FileUploadComponent,
@@ -96,7 +101,8 @@ import { DatatableMultiRowComponent } from './tabs/entity-datatable-tab/datatabl
     ExternalIdentifierComponent,
     EntityNotesTabComponent,
     EntityDocumentsTabComponent,
-    EntityDatatableTabComponent
+    EntityDatatableTabComponent,
+    SvgIconComponent
   ]
 })
 export class SharedModule { }
