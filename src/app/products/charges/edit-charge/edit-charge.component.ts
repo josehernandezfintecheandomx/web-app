@@ -94,12 +94,8 @@ export class EditChargeComponent implements OnInit {
       'chargeCalculationType': [this.chargeData.chargeCalculationType.id, Validators.required],
     });
     this.chargeAppliesTo = this.chargeData.chargeAppliesTo.id;
-    this.showCapitalized = (this.chargeAppliesTo == 1 && this.chargeData.chargeTimeType.id == 1);
-    if (this.showCapitalized) {
-      this.chargeForm.addControl('capitalized', new FormControl(this.chargeData.capitalized || false));
-    } else {
-      this.chargeForm.removeControl('capitalized');
-    }
+    this.showCapitalized = (this.chargeAppliesTo === 1 && this.chargeData.chargeTimeType.id === 1);
+    this.evalCapitalized(this.showCapitalized);
     switch (this.chargeData.chargeAppliesTo.value) {
       case 'Loan': {
         this.chargeTimeTypeOptions = this.chargeData.loanChargeTimeTypeOptions;
@@ -201,11 +197,6 @@ export class EditChargeComponent implements OnInit {
     if (charges.taxGroupId.value === '') {
       delete charges.taxGroupId;
     }
-    delete charges.dueOnPrepay;
-    delete charges.thirdpartyTransfer;
-    delete charges.capitalized;
-    delete charges.collectedAtDisburse;
-    delete charges.includeFeeInOutstanding;
     this.productsService.updateCharge(this.chargeData.id.toString(), charges)
       .subscribe((response: any) => {
         this.router.navigate(['../'], { relativeTo: this.route });

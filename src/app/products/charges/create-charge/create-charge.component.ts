@@ -179,11 +179,15 @@ export class CreateChargeComponent implements OnInit {
       if (this.chargeForm.get('chargeAppliesTo').value !== 4) {
         this.chargeForm.get('penalty').enable();
       }
-      this.showCapitalized = (this.chargeAppliesTo == 1 && chargeTimeType == 1);
+      this.showCapitalized = (this.chargeAppliesTo === 1 && chargeTimeType === 1);
       if (this.showCapitalized) {
         this.chargeForm.addControl('capitalized', new FormControl(false, Validators.required));
+        this.chargeForm.addControl('collectedAtDisburse', new FormControl(false, Validators.required));
+        this.chargeForm.addControl('includeFeeInOutstanding', new FormControl(false, Validators.required));
       } else {
         this.chargeForm.removeControl('capitalized');
+        this.chargeForm.removeControl('collectedAtDisburse');
+        this.chargeForm.removeControl('includeFeeInOutstanding');
       }
       switch (chargeTimeType) {
         case 6: // Annual Fee
@@ -241,9 +245,7 @@ export class CreateChargeComponent implements OnInit {
       locale
     };
     delete data.addFeeFrequency;
-    delete data.dueOnPrepay;
-    delete data.thirdpartyTransfer;
-    delete data.capitalized;
+
     if (!data.taxGroupId) {
       delete data.taxGroupId;
     }
