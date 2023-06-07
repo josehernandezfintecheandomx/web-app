@@ -44,7 +44,13 @@ export class UsersComponent implements OnInit {
    */
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe((data: { users: User[] }) => {
-      this.userData = data.users;
+      console.log(data.users)
+      this.userData = [];
+      data.users.forEach((user: any) => {
+        if (user.isSelfServiceUser) {
+          this.userData.push(user);
+        }
+      });
     });
   }
 
