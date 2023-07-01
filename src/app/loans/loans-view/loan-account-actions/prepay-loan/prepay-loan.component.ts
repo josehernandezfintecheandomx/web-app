@@ -81,6 +81,7 @@ export class PrepayLoanComponent implements OnInit, OnDestroy {
       'transactionAmount': ['', Validators.required],
       'externalId': [''],
       'paymentTypeId': [''],
+      'paymentStrategyId': [1, Validators.required],
       'note': ['']
     });
   }
